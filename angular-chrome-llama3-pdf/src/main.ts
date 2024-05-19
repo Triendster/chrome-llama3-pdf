@@ -1,6 +1,18 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+import { AppModule } from './app/app.module';
+
+const ROOT_ELEMENT_TAG = 'app-root';
+const ROOT_ELEMENT_ID = 'llama3-pdf'
+
+let rootElement = document.querySelector(ROOT_ELEMENT_TAG);
+
+if (!rootElement) {
+    rootElement = document.createElement(ROOT_ELEMENT_TAG);
+    rootElement.id = ROOT_ELEMENT_ID
+    document.body.appendChild(document.createElement(ROOT_ELEMENT_TAG));
+}
+
+platformBrowserDynamic()
+    .bootstrapModule(AppModule)
+    .catch((err) => console.error(err));
